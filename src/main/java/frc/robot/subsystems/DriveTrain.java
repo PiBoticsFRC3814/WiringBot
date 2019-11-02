@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveJoy;
 
@@ -21,32 +21,26 @@ import com.analog.adis16448.frc.*;
  */
 public class DriveTrain extends Subsystem {
   
-  WPI_TalonSRX lf;
-  WPI_TalonSRX lr;
-  WPI_TalonSRX rf;
-  WPI_TalonSRX rr;
+  WPI_TalonSRX Right;
+  WPI_TalonSRX Left;
 
-  MecanumDrive piboticsDrive;
+  DifferentialDrive piboticsDrive;
 
   ADIS16448_IMU gyro;
 
   public DriveTrain(){
-    lf = new WPI_TalonSRX(RobotMap.drive_lf);
-    lr = new WPI_TalonSRX(RobotMap.drive_lr);
-    rf = new WPI_TalonSRX(RobotMap.drive_rf);
-    rr = new WPI_TalonSRX(RobotMap.drive_rr);
+    Right = new WPI_TalonSRX(RobotMap.Right);
+    Left = new WPI_TalonSRX(RobotMap.Left);
 
-    piboticsDrive = new MecanumDrive(lf, lr, rf, rr);
+
+    piboticsDrive = new DifferentialDrive(Right, Left);
 
     gyro = new ADIS16448_IMU();
 
-    lf.setInverted(true);
-    lr.setInverted(true);
-
   }
   
-  public void mecanumDrive(double y, double x, double z, double gyro){
-    piboticsDrive.driveCartesian(x, y, z, gyro);
+  public void curvatureDrive(double y, double x){
+      piboticsDrive.curvatureDrive(y, x, false);
   }
 
   public double getAngle(){
@@ -65,20 +59,12 @@ public class DriveTrain extends Subsystem {
     return false;
   }
 
-  public boolean getLFDirection(){
-    return lf.getInverted();
+  public boolean getRightDirection(){
+    return Right.getInverted();
   }
 
-  public boolean getLRDirection(){
-    return lr.getInverted();
-  }
-
-  public boolean getRFDirection(){
-    return rf.getInverted();
-  }
-
-  public boolean getRRDirection(){
-    return rr.getInverted();
+  public boolean getLeftDirection(){
+    return Left.getInverted();
   }
 
   @Override

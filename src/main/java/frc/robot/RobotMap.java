@@ -15,10 +15,8 @@ package frc.robot;
  */
 public class RobotMap {
   //Drive train talons
-  public static final int drive_lf = 1;
-  public static final int drive_lr = 2;
-  public static final int drive_rf = 3;
-  public static final int drive_rr = 4;
+  public static final int Right = 1;
+  public static final int Left = 2;
   //control system
   public static final int oi_driver = 0;
   //pneumatics

@@ -92,7 +92,7 @@ public class DriveJoy extends Command {
 
     gyro = Robot.m_DriveTrain.getAngle();
 
-    Robot.m_DriveTrain.mecanumDrive(y, x, z, -gyro);
+    Robot.m_DriveTrain.curvatureDrive(y, x);
 
   }
 
@@ -111,5 +111,6 @@ public class DriveJoy extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.m_DriveTrain.curvatureDrive(0, 0);
   }
 }

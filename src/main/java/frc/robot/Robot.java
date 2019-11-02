@@ -26,6 +26,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static DriveTrain m_DriveTrain;
   public static Cannon m_Cannon;
+  public static Limelight m_Limelight;
   public static OI m_oi;
   public static Compressor comp;
 
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_DriveTrain = new DriveTrain();
     m_Cannon = new Cannon();
+    m_Limelight = new Limelight();
     comp = new Compressor(0);
     m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -72,6 +74,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    m_Limelight.displayOutput();
   }
 
   /**
